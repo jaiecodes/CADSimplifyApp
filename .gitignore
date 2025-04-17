@@ -41,7 +41,6 @@ eggs/
 lib/
 lib64/
 parts/
-sdist/
 var/
 *.dist-info/
 *.egg-info/
@@ -62,12 +61,9 @@ logs/
 
 
 # Briefcase build outputs
-dist/
 .bundle/
 .platform/
 *.app
-*.dmg
-*.exe
 *.msi
 *.AppImage
 
