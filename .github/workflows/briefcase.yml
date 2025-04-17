@@ -40,38 +40,38 @@ jobs:
           path: macOS/dist/*.dmg
 
   build-windows:
-  runs-on: windows-latest
+    runs-on: windows-latest
 
-  steps:
-    - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.11
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
 
-    - name: Install Briefcase
-      run: |
-        pip install --upgrade pip
-        pip install briefcase==0.3.22
+      - name: Install Briefcase
+        run: |
+          pip install --upgrade pip
+          pip install briefcase==0.3.22
 
-    - name: Create Windows App
-      run: briefcase create windows
+      - name: Create Windows App
+        run: briefcase create windows
 
-    - name: Build Windows App
-      run: briefcase build windows
+      - name: Build Windows App
+        run: briefcase build windows
 
-    - name: Debug Build Contents
-      run: dir build\simplifyapp\windows\app\src
+      - name: Debug Build Contents
+        run: dir build\simplifyapp\windows\app\src
 
-    - name: Package Windows App
-      run: briefcase package windows
+      - name: Package Windows App
+        run: briefcase package windows
 
-    - name: Debug Dist Contents
-      run: dir windows\dist
+      - name: Debug Dist Contents
+        run: dir windows\dist
 
-    - name: Upload Windows Installer
-      uses: actions/upload-artifact@v4
-      with:
-        name: CADSimplifier-Windows
-        path: windows/dist/*
+      - name: Upload Windows Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: CADSimplifier-Windows
+          path: windows/dist/*
