@@ -24,8 +24,8 @@ jobs:
       - name: Create and Build App
         run: |
           briefcase create
-          briefcase build
-          briefcase package
+          briefcase build macOS --no-sign
+          briefcase package macOS --no-sign
 
       - name: Upload macOS DMG
         uses: actions/upload-artifact@v4
