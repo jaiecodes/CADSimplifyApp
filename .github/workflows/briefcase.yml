@@ -23,8 +23,8 @@ jobs:
 
       - name: Build MacOS App
         run: |
-          briefcase create
-          briefcase build macOS --no-sign
+          briefcase create macOS
+          briefcase build macOS 
           briefcase package macOS --no-sign
 
       - name: Upload macOS DMG
@@ -51,7 +51,7 @@ jobs:
       - name: Build Windows App
         run: |
           briefcase create windows
-          briefcase build windows --no-sign
+          briefcase build windows
           briefcase package windows --no-sign
 
       - name: Upload Windows Installer
