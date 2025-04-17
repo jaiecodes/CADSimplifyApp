@@ -1,0 +1,32 @@
+# This project was generated with 0.3.22 using template: https://github.com/beeware/briefcase-template@v0.3.22
+[tool.briefcase]
+project_name = "CAD Simplifier"
+bundle = "com.bilab.simplifyapp"
+version = "0.0.1"
+url = "https://simplifyapp.bilab.com/simplifyapp"
+license.file = "LICENSE"
+author = "Jaden Ambroico Alcantara"
+author_email = "jambrocioalcantara@brunswick.com"
+
+[tool.briefcase.app.simplifyapp]
+formal_name = "CAD Simplifier"
+description = "Simplifies CAD files into glb files"
+long_description = "Convert heavy STEP files into optimized GLBs using FreeCAD, Blender, and CGAL."
+sources = ["src/simplifyapp"]
+resources = ["resources/bin", "resources/blender"]
+test_sources = ["tests"]
+requires = ["toga~=0.4.7"]
+
+[tool.briefcase.app.simplifyapp.macOS]
+requires = ["toga-cocoa~=0.4.7", "std-nslog~=1.0.3"]
+universal_build = true
+
+[tool.briefcase.app.simplifyapp.windows]
+requires = ["toga-winforms~=0.4.7"]
+
+[tool.briefcase.app.simplifyapp.linux]
+requires = ["toga-gtk~=0.4.7"]
+
+[tool.briefcase.app.simplifyapp.web]
+requires = ["toga-web~=0.4.7"]
+style_framework = "Shoelace v2.3"
