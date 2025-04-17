@@ -8,8 +8,6 @@ on:
 jobs:
   build-macos:
     runs-on: macos-latest
-    env:
-      BRIEFCASE_SKIP_SIGNING: 1 
 
     steps:
       - uses: actions/checkout@v3
@@ -21,17 +19,17 @@ jobs:
 
       - name: Install Briefcase
         run: |
-          python -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install briefcase==0.3.22
 
       - name: Create macOS App
         run: briefcase create macOS
 
-      - name: Build macOS App
-        run: briefcase build macOS
+      - name: Build macOS App (no signing)
+        run: BRIEFCASE_SKIP_SIGNING=1 briefcase build macOS
 
       - name: Package macOS App (no signing)
-        run: briefcase package macOS --no-sign
+        run: BRIEFCASE_SKIP_SIGNING=1 briefcase package macOS
 
       - name: Upload macOS DMG
         uses: actions/upload-artifact@v4
@@ -52,7 +50,7 @@ jobs:
 
       - name: Install Briefcase
         run: |
-          python -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install briefcase==0.3.22
 
       - name: Create Windows App
@@ -61,8 +59,11 @@ jobs:
       - name: Build Windows App
         run: briefcase build windows
 
-      - name: Package Windows App (no signing needed)
+      - name: Package Windows App
         run: briefcase package windows
+        
+      - name: List Windows dist contents (debug)
+        run: dir windows\dist
 
       - name: Upload Windows Installer
         uses: actions/upload-artifact@v4
