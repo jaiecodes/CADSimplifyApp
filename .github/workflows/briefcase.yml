@@ -21,7 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install briefcase
 
-      - name: Create and Build App
+      - name: Build MacOS App
         run: |
           briefcase create
           briefcase build macOS --no-sign
@@ -48,11 +48,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install briefcase
 
-      - name: Create and Build App
+      - name: Build Windows App
         run: |
-          briefcase create
-          briefcase build
-          briefcase package
+          briefcase create windows
+          briefcase build windows --no-sign
+          briefcase package windows --no-sign
 
       - name: Upload Windows Installer
         uses: actions/upload-artifact@v4
