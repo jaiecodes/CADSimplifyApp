@@ -27,45 +27,23 @@ class SimplifyApp(toga.App):
         self.main_box.add(self.simplify_button)
         self.main_box.add(self.result_label)
 
-        freecad_path = shutil.which("freecadcmd")
+        #freecad_path = shutil.which("freecadcmd")
         blender_path = shutil.which("blender")
 
-        if freecad_path:
-            self.main_box.add(toga.Label(f"✅ FreeCAD found at: {freecad_path}", style=Pack(padding=5)))
-        else:
-            self.main_box.add(toga.Label("❌ FreeCAD not found in PATH", style=Pack(padding=5)))
-            self.main_box.add(toga.Button("Install FreeCAD", on_press=self.install_freecad, style=Pack(padding=5)))
+        # if freecad_path:
+        #     self.main_box.add(toga.Label(f"✅ FreeCAD found at: {freecad_path}", style=Pack(padding=5)))
+        # else:
+        #     self.main_box.add(toga.Label("❌ FreeCAD not found in PATH", style=Pack(padding=5)))
 
         if blender_path:
             self.main_box.add(toga.Label(f"✅ Blender found at: {blender_path}", style=Pack(padding=5)))
         else:
             self.main_box.add(toga.Label("❌ Blender not found in PATH", style=Pack(padding=5)))
-            self.main_box.add(toga.Button("Install Blender", on_press=self.install_blender, style=Pack(padding=5)))
-
+            
         self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = self.main_box
         self.main_window.show()
 
-    def is_installed(self, cmd):
-        return shutil.which(cmd) is not None
-
-    def install_freecad(self, widget):
-        system = platform.system()
-        if system == "Darwin":
-            subprocess.run(["brew", "install", "--cask", "freecad"])
-        elif system == "Linux":
-            subprocess.run(["sudo", "apt", "install", "-y", "freecad"])
-        elif system == "Windows":
-            subprocess.run(["choco", "install", "freecad", "-y"], shell=True)
-
-    def install_blender(self, widget):
-        system = platform.system()
-        if system == "Darwin":
-            subprocess.run(["brew", "install", "--cask", "blender"])
-        elif system == "Linux":
-            subprocess.run(["sudo", "apt", "install", "-y", "blender"])
-        elif system == "Windows":
-            subprocess.run(["choco", "install", "blender", "-y"], shell=True)
 
     async def select_export_folder(self, widget):
         folder = await self.dialog(toga.SelectFolderDialog("Choose Export Folder"))
@@ -74,7 +52,7 @@ class SimplifyApp(toga.App):
             self.result_label.text = f"Export folder set to:\n{folder}"
 
     async def browse_file(self, widget):
-        dialog = toga.OpenFileDialog("Select CAD File", file_types=[".stp", ".step", ".STEP", ".STP"])
+        dialog = toga.OpenFileDialog("Select STL File", file_types=[".stl", ".STL"])
         selected = await self.dialog(dialog)
 
         if selected is not None:

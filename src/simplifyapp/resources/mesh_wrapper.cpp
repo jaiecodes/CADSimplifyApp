@@ -7,23 +7,27 @@
 #include <CGAL/Real_timer.h>
 
 #include <iostream>
+#include <filesystem>
 #include <string>
 
+namespace fs = std::filesystem;
 namespace PMP = CGAL::Polygon_mesh_processing;
 
 using K = CGAL::Exact_predicates_inexact_constructions_kernel;
 using Point_3 = K::Point_3;
 using Mesh = CGAL::Surface_mesh<Point_3>;
 
-std::string generate_output_name(std::string output_dir, std::string input_name, const double alpha, const double offset)
+std::string generate_output_name(std::string output_dir, std::string input_path, const double alpha, const double offset)
 {
-  input_name = input_name.substr(input_name.find_last_of("/") + 1);
-  input_name = input_name.substr(0, input_name.find_last_of("."));
-  std::string output_name = output_dir + "/" + input_name
-  + "_" + std::to_string(static_cast<int>(alpha))
-  + "_" + std::to_string(static_cast<int>(offset)) + ".stl";
+  fs::path input_file_path(input_path);
+  std::string filename_stem = input_file_path.stem().string(); // "SLX280"
+  
+  std::string new_filename = filename_stem + "_" 
+      + std::to_string(static_cast<int>(alpha)) + "_" 
+      + std::to_string(static_cast<int>(offset)) + ".stl";
 
-  return output_name;
+  fs::path output_path = fs::path(output_dir) / new_filename;
+  return output_path.string();
 }
 
 int main(int argc, char** argv)

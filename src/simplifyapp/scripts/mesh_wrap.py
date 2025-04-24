@@ -21,7 +21,7 @@ def run_alpha_wrap(input_path, export_dir, relative_alpha=20.0, relative_offset=
         str(relative_offset),
         export_dir
     ]
-
+    print(cmd)
     try:
         result = subprocess.run(cmd, check=True, capture_output=True, text=True)
         print(result.stdout)
