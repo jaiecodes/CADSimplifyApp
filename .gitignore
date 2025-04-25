@@ -64,7 +64,6 @@ logs/
 .bundle/
 .platform/
 *.app
-*.msi
 *.AppImage
 
 # Briefcase dev/virtual env

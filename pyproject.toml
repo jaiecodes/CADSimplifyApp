@@ -5,7 +5,7 @@ bundle = "com.bilab.simplifyapp"
 version = "0.0.1"
 url = "https://simplifyapp.bilab.com/simplifyapp"
 license.file = "LICENSE"
-author = "Jaden Ambroico Alcantara"
+author = "Jaden Ambrocio Alcantara"
 author_email = "jambrocioalcantara@brunswick.com"
 
 [tool.briefcase.app.simplifyapp]

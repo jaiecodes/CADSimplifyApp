@@ -45,7 +45,7 @@ def close_blend_file():
     bpy.ops.wm.save_mainfile(filepath=BLENDER_FILE, exit=True)
 
 def import_stl_mesh(path):
-    bpy.ops.wm.stl_import(filepath=path, global_scale=0.1, up_axis='Y')
+    bpy.ops.wm.stl_import(filepath=path, global_scale=0.05, up_axis='Y', use_mesh_validate=False)
 
 def import_gltf_mesh(path):
     bpy.ops.import_scene.gltf(filepath=path)

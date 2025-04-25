@@ -37,7 +37,7 @@ def find_blender():
 
     raise FileNotFoundError("Blender executable not found. Please install Blender or add it to your PATH.")
 
-def run_blender_process(model_path, export_dir):
+def run_blender_process(model_path, export_dir, logger):
     if not os.path.isfile(model_path):
         raise FileNotFoundError(f"Input file not found: {model_path}")
 
@@ -53,6 +53,7 @@ def run_blender_process(model_path, export_dir):
         ], capture_output=True, text=True, check=True)
 
         print(result.stdout)
+        logger(result.stdout)
         output_lines = result.stdout.strip().splitlines()
         path_line = next((line for line in reversed(output_lines) if line.startswith("Export:")), None)
         if path_line:
@@ -61,7 +62,8 @@ def run_blender_process(model_path, export_dir):
         if not path_line:
             raise RuntimeError("No exported file path found in Blender output.")
 
-        print("[Blender] Exported file to:", path_line)
+        print(f"[Blender] Exported file to: {path_line}")
+        logger(f"[Blender] Exported file to: {path_line}")
         return path_line
 
     except subprocess.CalledProcessError as e:
