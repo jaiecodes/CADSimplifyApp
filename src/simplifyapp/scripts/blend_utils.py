@@ -5,14 +5,15 @@ import sys
 MODIFIER_NAME = "DECIMATE_MOD"
 
 # --- Parse args ---
-if "--" not in sys.argv or len(sys.argv) < sys.argv.index("--") + 4:
-    print("Too few arguments. Usage: blender --background --python script.py -- model_path export_dir blender_dir")
+if "--" not in sys.argv or len(sys.argv) < sys.argv.index("--") + 5:
+    print("Too few arguments. Usage: blender --background --python script.py -- model_path export_dir blender_dir filename")
     sys.exit(1)
 
 args = sys.argv[sys.argv.index("--") + 1:]
 model_path = args[0]
 export_dir = args[1]
 blender_dir = args[2]
+filename = args[3]
 
 BLENDER_FILE = os.path.join(blender_dir, "workspace.blend")
 
@@ -77,15 +78,19 @@ def decimate_mesh(obj, ratio):
     modifier.use_collapse_triangulate = True
     apply_modifier(obj, MODIFIER_NAME)
 
-def convert_to_quads(obj):
+def convert_to_quads(obj, bShouldSubDiv=True):
     bpy.ops.object.mode_set(mode='OBJECT')
     bpy.context.view_layer.objects.active = obj
     obj.select_set(True)
 
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.select_all(action='SELECT')
-    bpy.ops.mesh.tris_convert_to_quads()
-    bpy.ops.mesh.unsubdivide(iterations=4)
+    if bShouldSubDiv:
+        bpy.ops.mesh.tris_convert_to_quads(face_threshold=1.0472, shape_threshold=1.0472)
+        bpy.ops.mesh.select_all(action='SELECT')
+        bpy.ops.mesh.unsubdivide(iterations=4)
+    else:
+        bpy.ops.mesh.tris_convert_to_quads()
     bpy.ops.object.mode_set(mode='OBJECT')
 
 def convert_to_tris(obj):
@@ -99,9 +104,10 @@ def convert_to_tris(obj):
     bpy.ops.object.mode_set(mode='OBJECT')
 
 def export_mesh(obj):
-    filename = f"{obj.name}_blender.glb"
-    filepath = os.path.join(export_dir, filename)
-    bpy.ops.export_scene.gltf(filepath=filepath)
+    blender_filename = f"{obj.name}_simplified.fbx"
+    filepath = os.path.join(export_dir, blender_filename)
+    print(f"Exporting to: {filepath}")
+    bpy.ops.export_scene.fbx(filepath=filepath)
     return filepath
 
 # --- Main logic ---
@@ -118,7 +124,7 @@ def run_blender_processing(file_path):
         import_gltf_mesh(file_path)
 
     mesh = get_main_mesh()
-    filename, _ = os.path.splitext(os.path.basename(file_path))
+    print(filename)
     mesh.name = filename
     mesh.data.name = filename
 
@@ -126,8 +132,8 @@ def run_blender_processing(file_path):
 
     convert_to_quads(mesh)
     decimate_mesh(mesh, 0.2)
-    decimate_mesh(mesh, 0.4)
-    convert_to_tris(mesh)
+    decimate_mesh(mesh, 0.75)
+    convert_to_quads(mesh, False)
 
     print("Final faces:", len(mesh.data.polygons))
 

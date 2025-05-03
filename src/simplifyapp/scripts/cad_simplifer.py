@@ -8,8 +8,8 @@ from simplifyapp.scripts.blend_proc import run_blender_process
 def run_simplifer(model_path, export_dir, logger):
     print(f"[CAD Simplifier] Processing... {model_path}")
     logger(f"[CAD Simplifier] Processing... {model_path}")
-    # print("[Simplifer] Starting conversion to STL...")
-    # stl_path = convert_to_stl(model_path, export_dir)
+    
+    filename, _ = os.path.splitext(os.path.basename(model_path))
 
     print("[CAD Simplifier] Running first alpha wrap...")
     logger("[CAD Simplifier] Running first alpha wrap...")
@@ -21,7 +21,7 @@ def run_simplifer(model_path, export_dir, logger):
 
     print("[CAD Simplifier] Running Blender processing via subprocess...")
     logger("[CAD Simplifier] Running Blender processing via subprocess...")
-    final_path = run_blender_process(wrapped_path_2, export_dir, logger)
+    final_path = run_blender_process(model_path, export_dir, filename, logger)
 
     print(f"[CAD Simplifier] Done! Final output at: {final_path}")
     logger(f"[CAD Simplifier] Done! Final output at: {final_path}")
