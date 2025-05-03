@@ -21,7 +21,7 @@ def run_simplifer(model_path, export_dir, logger):
 
     print("[CAD Simplifier] Running Blender processing via subprocess...")
     logger("[CAD Simplifier] Running Blender processing via subprocess...")
-    final_path = run_blender_process(model_path, export_dir, filename, logger)
+    final_path = run_blender_process(wrapped_path_2, export_dir, filename, logger)
 
     print(f"[CAD Simplifier] Done! Final output at: {final_path}")
     logger(f"[CAD Simplifier] Done! Final output at: {final_path}")
