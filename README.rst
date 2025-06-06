@@ -14,7 +14,7 @@ Features
    - Uses two paramters:
       - Alpha: Determines with facets are included in the wrap (includes facets with larger circumradius than alpha)
       - Offset: The distance of the new facets from the original mesh 
-   .. image:: UI_Demo.png
+   .. image:: aw3_alpha_offset.jpg
       :alt: Screenshot of CAD Simplifier Interface
       :width: 800px
 - Automates **mesh decimation** using **Blender** `Python API`_
