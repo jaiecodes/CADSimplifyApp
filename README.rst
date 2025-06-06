@@ -10,7 +10,7 @@ Features
 
 - Converts `.stl` files to `.fbx`
 - Reduces polygon count for improved performance
-- Uses **CGAL's Alpha Wrapping algorithm** to generate cleaner and more uniform topology ([CGAL Alpha Wrapping](https://www.cgal.org/2021/06/25/Alpha_Wrapping/))
+- Uses **CGAL's Alpha Wrapping algorithm** to generate cleaner and more uniform topology ([CGAL Alpha Wrapping](https://doc.cgal.org/latest/Alpha_wrap_3))
 - Automates **mesh decimation** using the **Blender Python API** ([Blender API](https://docs.blender.org/api/current/))
 - Saves the output to the `exported` folder after each wrapping and decimation step
 - Easy-to-use interface  
