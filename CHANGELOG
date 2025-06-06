@@ -3,3 +3,8 @@
 ## 0.0.1 (16 Apr 2025)
 
 * Initial release
+
+## 0.0.2 (4 June 2025)
+
+* Added parameter customization to UI
+* Updated documentation and logger output
