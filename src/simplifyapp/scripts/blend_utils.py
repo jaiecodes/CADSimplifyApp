@@ -5,8 +5,8 @@ import sys
 MODIFIER_NAME = "DECIMATE_MOD"
 
 # --- Parse args ---
-if "--" not in sys.argv or len(sys.argv) < sys.argv.index("--") + 5:
-    print("Too few arguments. Usage: blender --background --python script.py -- model_path export_dir blender_dir filename")
+if "--" not in sys.argv or len(sys.argv) < sys.argv.index("--") + 6:
+    print("Too few arguments. Usage: blender --background --python script.py -- model_path export_dir blender_dir filename decimate ratio")
     sys.exit(1)
 
 args = sys.argv[sys.argv.index("--") + 1:]
@@ -14,6 +14,7 @@ model_path = args[0]
 export_dir = args[1]
 blender_dir = args[2]
 filename = args[3]
+decimate_ratio = float(args[4])
 
 BLENDER_FILE = os.path.join(blender_dir, "workspace.blend")
 
@@ -125,13 +126,15 @@ def run_blender_processing(file_path):
 
     mesh = get_main_mesh()
     print(filename)
+    print(export_dir)
     mesh.name = filename
     mesh.data.name = filename
 
     print("Initial faces:", len(mesh.data.polygons))
 
     convert_to_quads(mesh)
-    decimate_mesh(mesh, 0.2)
+    print("Post Quad Convert")
+    decimate_mesh(mesh, decimate_ratio)
     decimate_mesh(mesh, 0.75)
     convert_to_quads(mesh, False)
 

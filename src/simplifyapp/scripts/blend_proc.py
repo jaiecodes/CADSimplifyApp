@@ -37,7 +37,7 @@ def find_blender():
 
     raise FileNotFoundError("Blender executable not found. Please install Blender or add it to your PATH.")
 
-def run_blender_process(model_path, export_dir, filename, logger):
+def run_blender_process(model_path, export_dir, filename, decimate_ratio, logger):
     if not os.path.isfile(model_path):
         raise FileNotFoundError(f"Input file not found: {model_path}")
 
@@ -49,7 +49,7 @@ def run_blender_process(model_path, export_dir, filename, logger):
             blender_path,
             "--background",
             "--python", blender_script,
-            "--", model_path, export_dir, BLENDER_DIR, filename
+            "--", model_path, export_dir, BLENDER_DIR, filename, str(decimate_ratio)
         ], capture_output=True, text=True, check=True)
 
         print(result.stdout)

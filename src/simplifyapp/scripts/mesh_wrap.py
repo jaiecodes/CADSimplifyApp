@@ -4,7 +4,7 @@ import os
 import subprocess
 from simplifyapp.scripts.config import WRAPPER_BIN_DIR
 
-def run_alpha_wrap(input_path, export_dir, logger, relative_alpha=20.0, relative_offset=600.0):
+def run_alpha_wrap(input_path, export_dir, relative_alpha, relative_offset, logger):
     if not os.path.isfile(input_path):
         raise FileNotFoundError(f"[Alpha Wrap] Mesh file not found: {input_path}")
 
