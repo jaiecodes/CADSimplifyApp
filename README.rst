@@ -25,6 +25,59 @@ Features
       :alt: Screenshot of CAD Simplifier Interface
       :width: 800px
 
+Software Requirements
+--------
+To run this application, you must have the following software installed. The app automatically searches for these in standard installation paths.
+
++----------------+--------------------------+------------------------------------------------------------+ | Software | Supported Versions | Notes | +================+==========================+============================================================+ | Blender | 3.x or 4.x | Required for mesh decimation and FBX/GLB export. | +----------------+--------------------------+------------------------------------------------------------+ | FreeCAD | 0.21 or higher | Specifically requires FreeCADCmd (Command Line).| +----------------+--------------------------+------------------------------------------------------------+ | Python | 3.8+ | Required for development and running via Briefcase. | +----------------+--------------------------+------------------------------------------------------------+
+
+Setting Paths for Blender and FreeCAD
+--------
+The application logic attempts to locate these tools automatically in the following order:
+
+System PATH: If you can run blender or FreeCADCmd from your terminal, the app will find them.
+
+Standard Directories:
+
+Windows: Searches %ProgramFiles%\Blender Foundation and %ProgramFiles%\FreeCAD 0.21\bin\FreeCADCmd.exe.
+
+macOS: Searches /Applications/Blender.app and /Applications/FreeCAD.app.
+
+Linux: Searches /usr/bin/, /snap/bin/, or /usr/local/bin/.
+
+.. note:: If your software is installed in a custom location, add the directory containing the executable to your system's environment variables (PATH).
+
+How to Setup and Run (Development)
+--------
+To set up the project on a new computer for development:
+
+Clone the Repository .. code-block:: bash
+
+git clone <your-repository-url> cd simplifyapp
+
+Create a Virtual Environment .. code-block:: bash
+
+Windows
+python -m venv venv venv\Scripts\activate
+
+macOS/Linux
+python3 -m venv venv source venv/bin/activate
+
+Install Briefcase .. code-block:: bash
+
+pip install briefcase
+
+Run in Development Mode This command installs the necessary Python dependencies (like Toga) and starts the app: .. code-block:: bash
+
+briefcase dev
+
+Packaging the App
+To create a native installer for your operating system:
+
+.. code-block:: bash
+
+briefcase create briefcase build briefcase package
+
 About
 -----
 
