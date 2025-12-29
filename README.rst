@@ -27,9 +27,9 @@ To run this application, you must have the following software installed. The app
 +----------------+--------------------------+------------------------------------------------------------+
 | Software       | Supported Versions       | Notes                                                      |
 +================+==========================+============================================================+
-| **Blender** | 3.x or 4.x               | Required for mesh decimation and FBX/GLB export.           |
+| **Blender** | 3.x or 4.x               | Required for mesh decimation and FBX/GLB export. |
 +----------------+--------------------------+------------------------------------------------------------+
-| **FreeCAD** | 0.21 or higher           | Specifically requires ``FreeCADCmd`` (Command Line).       |
+| **FreeCAD** | 0.21 or higher           | Specifically requires ``FreeCADCmd`` (Command Line).|
 +----------------+--------------------------+------------------------------------------------------------+
 | **Python** | 3.8+                     | Required for development and running via Briefcase.        |
 +----------------+--------------------------+------------------------------------------------------------+
@@ -57,7 +57,7 @@ To set up the project on a new computer for development:
 
    .. code-block:: bash
 
-      git clone <your-repository-url>
+      git clone https://github.com/jaiecodes/CADSimplifyApp.git
       cd simplifyapp
 
 2. **Create a Virtual Environment**
