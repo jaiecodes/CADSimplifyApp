@@ -1,91 +1,108 @@
 CAD Simplifier
 ==============
 
-**CAD Simplifier** is a cross-platform Python application that simplifies CAD files by converting `.stl` models into `.fbx` files with reduced polygon count.
+**CAD Simplifier** is a cross-platform Python application that simplifies CAD files by converting complex models into optimized ``.glb`` or ``.fbx`` files with reduced polygon counts.
 
 This tool uses advanced mesh processing techniques to create optimized versions of 3D CAD models, making them more efficient for use in real-time applications such as games or augmented reality.
 
 Features
 --------
 
-- Converts `.stl` files to `.fbx`
-- Reduces polygon count for improved performance
-- Uses **CGAL's Alpha Wrapping algorithm** to generate cleaner and more uniform topology `CGAL Alpha Wrapping`_
-   - Uses two paramters:
-      - Alpha: Determines with facets are included in the wrap (includes facets with larger circumradius than alpha)
-      - Offset: The distance of the new facets from the original mesh 
-   .. image:: aw3_alpha_offset.jpg
-      :alt: Screenshot of CAD Simplifier Interface
-      :width: 800px
-- Automates **mesh decimation** using **Blender** `Python API`_
-- Saves the output to the `exported` folder after each wrapping and decimation step
-- Easy-to-use interface  
+- **CAD to STL Conversion**: Converts heavy STEP files using FreeCAD.
+- **Mesh Decimation**: Reduces polygon count for improved performance via Blender's Decimate modifier.
+- **CGAL Alpha Wrapping**: Uses `CGAL Alpha Wrapping`_ to generate cleaner and more uniform topology.
+    - **Alpha**: Determines which facets are included in the wrap.
+    - **Offset**: The distance of the new facets from the original mesh.
+- **Automated Workflow**: Orchestrates multiple software tools into a single-click process.
 
-   .. image:: UI_Demo.png
-      :alt: Screenshot of CAD Simplifier Interface
-      :width: 800px
+.. image:: UI_Demo.png
+   :alt: Screenshot of CAD Simplifier Interface
+   :width: 800px
 
 Software Requirements
---------
+---------------------
+
 To run this application, you must have the following software installed. The app automatically searches for these in standard installation paths.
 
-+----------------+--------------------------+------------------------------------------------------------+ | Software | Supported Versions | Notes | +================+==========================+============================================================+ | Blender | 3.x or 4.x | Required for mesh decimation and FBX/GLB export. | +----------------+--------------------------+------------------------------------------------------------+ | FreeCAD | 0.21 or higher | Specifically requires FreeCADCmd (Command Line).| +----------------+--------------------------+------------------------------------------------------------+ | Python | 3.8+ | Required for development and running via Briefcase. | +----------------+--------------------------+------------------------------------------------------------+
++----------------+--------------------------+------------------------------------------------------------+
+| Software       | Supported Versions       | Notes                                                      |
++================+==========================+============================================================+
+| **Blender** | 3.x or 4.x               | Required for mesh decimation and FBX/GLB export.           |
++----------------+--------------------------+------------------------------------------------------------+
+| **FreeCAD** | 0.21 or higher           | Specifically requires ``FreeCADCmd`` (Command Line).       |
++----------------+--------------------------+------------------------------------------------------------+
+| **Python** | 3.8+                     | Required for development and running via Briefcase.        |
++----------------+--------------------------+------------------------------------------------------------+
 
 Setting Paths for Blender and FreeCAD
---------
+-------------------------------------
+
 The application logic attempts to locate these tools automatically in the following order:
 
-System PATH: If you can run blender or FreeCADCmd from your terminal, the app will find them.
+1. **System PATH**: If you can run ``blender`` or ``FreeCADCmd`` from your terminal, the app will find them.
+2. **Standard Directories**:
+    - **Windows**: Searches ``%ProgramFiles%\Blender Foundation`` and ``%ProgramFiles%\FreeCAD 0.21\bin\FreeCADCmd.exe``.
+    - **macOS**: Searches ``/Applications/Blender.app`` and ``/Applications/FreeCAD.app``.
+    - **Linux**: Searches ``/usr/bin/``, ``/snap/bin/``, or ``/usr/local/bin/``.
 
-Standard Directories:
-
-Windows: Searches %ProgramFiles%\Blender Foundation and %ProgramFiles%\FreeCAD 0.21\bin\FreeCADCmd.exe.
-
-macOS: Searches /Applications/Blender.app and /Applications/FreeCAD.app.
-
-Linux: Searches /usr/bin/, /snap/bin/, or /usr/local/bin/.
-
-.. note:: If your software is installed in a custom location, add the directory containing the executable to your system's environment variables (PATH).
+.. note::
+   If your software is installed in a custom location, add the directory containing the executable to your system's environment variables (PATH).
 
 How to Setup and Run (Development)
---------
+----------------------------------
+
 To set up the project on a new computer for development:
 
-Clone the Repository .. code-block:: bash
+1. **Clone the Repository**
 
-git clone <your-repository-url> cd simplifyapp
+   .. code-block:: bash
 
-Create a Virtual Environment .. code-block:: bash
+      git clone <your-repository-url>
+      cd simplifyapp
 
-Windows
-python -m venv venv venv\Scripts\activate
+2. **Create a Virtual Environment**
 
-macOS/Linux
-python3 -m venv venv source venv/bin/activate
+   .. code-block:: bash
 
-Install Briefcase .. code-block:: bash
+      # Windows
+      python -m venv venv
+      venv\Scripts\activate
 
-pip install briefcase
+      # macOS/Linux
+      python3 -m venv venv
+      source venv/bin/activate
 
-Run in Development Mode This command installs the necessary Python dependencies (like Toga) and starts the app: .. code-block:: bash
+3. **Install Briefcase**
 
-briefcase dev
+   .. code-block:: bash
+
+      pip install briefcase
+
+4. **Run in Development Mode**
+
+   This command installs the necessary Python dependencies (like Toga) and starts the app:
+
+   .. code-block:: bash
+
+      briefcase dev
 
 Packaging the App
+-----------------
+
 To create a native installer for your operating system:
 
 .. code-block:: bash
 
-briefcase create briefcase build briefcase package
+   briefcase create
+   briefcase build
+   briefcase package
 
 About
 -----
 
-**This cross-platform app was generated by** `Briefcase`_ **– part of**
-`The BeeWare Project`_.
+**This cross-platform app was generated by** `Briefcase`_ – part of `The BeeWare Project`_.
 
 .. _`CGAL Alpha Wrapping`: https://doc.cgal.org/latest/Alpha_wrap_3
 .. _`Python API`: https://docs.blender.org/api/current/
 .. _`Briefcase`: https://briefcase.readthedocs.io/
 .. _`The BeeWare Project`: https://beeware.org/
-.. _`becoming a financial member of BeeWare`: https://beeware.org/contributing/membership
