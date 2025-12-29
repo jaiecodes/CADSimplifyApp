@@ -23,6 +23,7 @@ Software Requirements
 ---------------------
 
 To run this application, you must have the following software installed. The app automatically searches for these in standard installation paths.
+
 +------------+----------------------+------------------------------------------------------------+
 | Software   | Supported Versions   | Notes                                                      |
 +============+======================+============================================================+
