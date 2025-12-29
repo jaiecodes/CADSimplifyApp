@@ -31,7 +31,7 @@ To run this application, you must have the following software installed. The app
 +------------+----------------------+------------------------------------------------------------+
 | **FreeCAD**| 0.21 or higher       | Specifically requires ``FreeCADCmd`` (Command Line).       |
 +------------+----------------------+------------------------------------------------------------+
-| **Python** | 3.8+                 | Required for development and running via Briefcase.        |
+| **Python** | 3.8 - 3.12           | Required for development and running via Briefcase.        |
 +------------+----------------------+------------------------------------------------------------+
 
 
